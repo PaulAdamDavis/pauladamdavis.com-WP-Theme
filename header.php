@@ -53,7 +53,17 @@
 
 	<header id="header">
 
-	   <div class="instagram_mosaic"></div>
+         <?php
+            $images = array(
+                'blonc.jpg',
+                'france.jpg',
+                'france_2.jpg',
+                'ilse.jpg'
+            );
+            $rand_keys = array_rand($images, 1);
+        ?>
+
+	   <div class="instagram_mosaic" style="background-image: url(<?php echo get_bloginfo("template_url") . '/images/headers/' . $images[$rand_keys]; ?>);"></div>
 
 	    <a id="logo" href="<?php bloginfo('url'); ?>"><?php bloginfo('name'); ?></a>
 	    <small>Designer – developer – music lover – speaker – freelancer</small>

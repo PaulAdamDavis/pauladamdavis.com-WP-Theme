@@ -168,4 +168,10 @@ $(function(){
         'overlayColor' : '#000'
     });
 
+    // Re-pain header, fix for resizing viewport uints
+    causeRepaintsOn = $("#header *");
+    $(window).resize(function() {
+        causeRepaintsOn.css("z-index", 10);
+    });
+
 });
