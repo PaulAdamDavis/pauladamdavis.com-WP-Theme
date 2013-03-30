@@ -1,0 +1,221 @@
+/* ARTICLE */
+article {
+	header {
+		.clearfix;
+		margin-bottom: 50px; 
+		h1 {
+			max-width: 600px;
+			margin-bottom: 0;
+			line-height: 38px;
+			margin-top: 6px;
+			margin-bottom: 6px;
+			a {
+				&:link, &:visited {
+					color: #000;
+				}
+				&:hover, &:active, &:focus {
+					color: @brand;
+				}
+			}
+		}
+		time {
+			font-family: Arial, sans-serif;
+			font-size: 10px;
+			color: #ccc;
+			line-height: 12px;
+			float: left; 
+			span {
+				font-weight: bold;
+				color: #999;
+			}
+		}
+		.comments {
+			font-size: 10px;
+			color: #ccc;
+			font-family: Arial, sans-serif;
+			float: left;
+			font-weight: bold;
+			line-height: 12px;
+			margin-left: 15px;
+			position: relative;
+			&::before {
+				content: "•";
+				position: absolute;
+				top: 0;
+				left: -10px;
+				font-size: 14px;
+			}
+		}
+		.category {
+    		font-size: 10px;
+    		color: #ccc;
+    		font-family: Arial, sans-serif;
+    		float: left;
+    		font-weight: bold;
+    		line-height: 12px;
+    		margin-left: 15px;
+    		position: relative;
+    		&::before {
+    		  content: "•";
+    		  position: absolute;
+    		   top: 0;
+    		   left: -10px;
+    		   font-size: 14px;
+    		  }
+		}
+	}
+	
+	pre {
+		max-width: 100%;
+		padding: 3px 10px;
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
+		background: rgba(0,0,0,0.1);
+	}
+	code {
+		background: #eee;
+		font-size: 12px;
+		line-height: 20px;
+		font-weight: bold;
+		padding-left: 3px;
+		padding-right: 3px;
+	}
+	pre code {
+		background: none;
+		padding: 0;
+		font-weight: normal;
+		font-size: 13px;
+		line-height: 18px;
+	}
+	
+	ul, ol {
+		padding-left: 30px;
+		font-size: 14px;
+		line-height: 22px;
+		color: #666;
+		li {}
+	}
+	img {
+		max-width: 100%;
+	}
+	p + h2 {
+		margin-top: 50px;
+	}
+	p {}
+	blockquote {
+		position: relative;
+		color: #444;
+		font-size: 15px;
+		line-height: 22px;
+		border-left: 3px solid #ccc;
+		padding-left: 20px;
+		&::before {
+			position: absolute;
+			content: "“";
+			top: 42px;
+			left: -70px;
+			font-size: 110px;
+			color: #ccc;
+		}
+	}
+	h2, h3, h4, h5, h6 {
+    	margin-bottom: 5px;
+	}
+	pre, img, video, object, ul, ol, iframe {
+	   margin-bottom: 20px;
+    }
+}
+article + article {
+	margin: 50px 0;
+	padding-top: 50px;
+	border-top: 1px solid @borderColor;
+}
+
+.month_archive {
+	padding-left: 20px;
+	li {
+		list-style: outside none;
+		sup	{
+			font-size: 12px;
+			position: relative;
+			top: -2px;
+		}
+	}
+}
+
+
+.memoirs_color {
+    a {
+        &:link, &:visited {
+            color: @blue;
+        }
+    }
+}
+.business_color {
+    a {
+        &:link, &:visited {
+            color: @red;
+        }
+    }
+}
+.builds_color {
+    a {
+        &:link, &:visited {
+            color: @orange;
+        }
+    }
+}
+.thoughts_color {
+    a {
+        &:link, &:visited {
+            color: @purple;
+        }
+    }
+}
+.general_color {
+    a {
+        &:link, &:visited {
+            color: @brand;
+        }
+    }
+}
+
+/* SOCIAL */
+.social {
+	padding-top: 30px;
+	.facebook {
+		top: 1px; position: relative;
+	}
+}
+
+/* NEXT PREV */
+.nextPrevLinks {
+	font-size: 12px;
+	margin: 100px 0 50px;
+	border-top: 1px solid @borderColor;
+	border-bottom: 1px solid @borderColor;
+	.clearfix;
+	a {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		display: inline-block;
+		&:link, &:visited {
+			color: #000;
+		}
+		&:hover, &:active, &:focus {
+			color: @brand;
+		}
+	}
+	.alignleft, .alignright {
+		white-space: nowrap;
+	}
+	.alignleft {
+		width: 45%;
+		overflow: hidden;
+	}
+	.alignright	{
+		width: 45%;
+		text-align: right;
+		overflow: hidden;
+	}
+}
