@@ -3,7 +3,7 @@
 <aside id="sidebar">
 
 	<h1>Paul is a freelance designer, award-winning developer, podcaster, speaker, music lover, drummer and general nerd.</h1>
-	
+
 	<p>He periodically speaks about code &amp; stuff with Tom Ashworth and guests on <a href="http://lessthanbang.com" style="color: #52a0c8;">Less&nbsp;Than&nbsp;Bang</a></p>
 
 	<p>Paul works under the pseudonym <a href="http://codebymonkey.com" class="red">Code&nbsp;By&nbsp;Monkey</a>. Get in touch.</p>
@@ -13,25 +13,26 @@
 	<form method="get" action="/" class="search_box">
 		<input type="search" name="s" placeholder="Search&hellip;" />
 		<button type="submit" style="line-height: 28px;">Go</button>
-	</form>	
-	
+	</form>
+
 	<h3 style="margin-top: 30px;">Instagram</h3>
 	<?php
-		
         /*****
             GET INSTAGRAM DATA
+            ---
+            NOTE: This API key only works on my domain
         *****/
         $token = '213.f59def8.5df6aa3e1f01400796abe633d3c38db6';
         $userID = 213;
         $count = 30;
         $url = "https://api.instagram.com/v1/users/self/media/recent?access_token=". $token ."&count=". $count;
-        $instagram = get_transient("instagram");  
-        if (!$instagram) :  
+        $instagram = get_transient("instagram");
+        if (!$instagram) :
             $array = file_get_contents($url);
             $data = $array;
             if ($data) :
                 set_transient("instagram", $data, 60 * 60 * 1); // Stored for one hour. 60s X 60m X 1h (don't really need the hour there)
-                $instagram = $data;  
+                $instagram = $data;
             endif;
         endif;
         $instagram = json_decode($instagram);
@@ -40,23 +41,21 @@
             $data = $instagram->data[$i];
             $thumb = $data->images->thumbnail->url;
             $full = $data->images->standard_resolution->url;
-            $caption = (!empty($data->caption)) ? $data->caption->text : '';			    
-            // echo '<a rel="instagram" title="'. $caption .'" href="'. $full .'"><img class="instagram_thumb" src="'. $thumb .'" /></a>';
+            $caption = (!empty($data->caption)) ? $data->caption->text : '';
             echo '<a rel="instagram" href="'. $full .'"><img class="instagram_thumb" src="'. $thumb .'" /></a>';
-            $i++; 
+            $i++;
         }
 
-		// for($i = 0; $i < 30; $i++) {
-		//     echo '<a rel="instagram" href="'. get_bloginfo("template_url") .'/_insta/insta/'. ($i+1) .'.jpg"><img class="instagram_thumb" src="'. get_bloginfo("template_url") .'/_insta/insta/'. ($i+1) .'.jpg" /></a>';
-		// }	
-        					
 	?>
 	<div class="clear"></div>
-		
 
-		
 	<h3 style="margin-top: 50px;">Tweets <a href="http://twitter.com/pauladamdavis">#</a></h3>
 	<?php
+        /*****
+            GET TWEETS
+            ---
+            TODO: Convert to use API v1.1
+        *****/
 	    $twitterFeed = 'http://api.twitter.com/1/statuses/user_timeline.rss?screen_name=pauladamdavis';
 	    include_once(ABSPATH . WPINC . '/feed.php');
 	    $rss = fetch_feed(array(

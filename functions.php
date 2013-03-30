@@ -139,21 +139,8 @@
             default :
         ?>
 
-        <?php
-
-            /*$avatar_size = 80;
-
-            if ($depth === 1) $avatar_size = 80;
-            if ($depth === 2) $avatar_size = 60;
-            if ($depth === 3) $avatar_size = 50;
-            if ($depth === 4) $avatar_size = 40;
-            */
-
-        ?>
-
         <li class="comment-item depth_<?php echo $depth; ?>" id="li-comment-<?php comment_ID(); ?>">
             <article id="comment-<?php comment_ID(); ?>" class="comment">
-
 
                 <div class="left">
     				<?php comment_author_link() ?> <a href="#comment-<?php comment_id(); ?>" class="comment_hash">#</a>
@@ -182,8 +169,6 @@
 
                 <div class="clear"></div>
 
-
-
             </article><!-- #comment-## -->
 
         <?php
@@ -191,7 +176,6 @@
         endswitch;
     }
     endif; // ends check for twentyeleven_comment()
-
 
 
     function convert_number_to_words($number, $alt) {
