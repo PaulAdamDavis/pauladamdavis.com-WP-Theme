@@ -18,7 +18,7 @@
     <script src="<?php bloginfo('template_url'); ?>/js/respond.js"></script>
     <![endif]-->
 
-    <!-- Typekit -->
+    <!-- Typekit // Only works on pauladamdavis.com -->
     <script type="text/javascript" src="http://use.typekit.com/pxo6zke.js"></script>
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
