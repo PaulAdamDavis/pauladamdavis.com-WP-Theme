@@ -1,6 +1,4 @@
 
-
-
 	</div><!-- end .wrapper -->
 
     <footer id="footer">
