@@ -35,7 +35,7 @@
     }
 
     // Alter time between RSS refreshes
-    add_filter( 'wp_feed_cache_transient_lifetime', create_function( '$a', 'return 1800;' ) );
+    add_filter('wp_feed_cache_transient_lifetime', create_function('$a', 'return 1800;'));
 
     // Support featured image
     add_theme_support('post-thumbnails');

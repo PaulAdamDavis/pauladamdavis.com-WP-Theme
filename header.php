@@ -23,7 +23,7 @@
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
     <!-- CSS -->
-	<link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/styles/css/less.css" type="text/css" />
+	<link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/styles/css/less.css?123456" type="text/css" />
 
 	<!-- The small mountain of stuff WP puts in -->
     <?php wp_head(); ?>
@@ -54,16 +54,24 @@
 	<header id="header">
 
          <?php
-            $images = array(
-                'blonc.jpg',
-                'france.jpg',
-                'france_2.jpg',
-                'ilse.jpg'
-            );
-            $rand_keys = array_rand($images, 1);
+
+            if (has_post_thumbnail($post->ID)) :
+                $src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), array(1200, 600), false, '' );
+                $header_image = $src[0];
+            else :
+                $images = array(
+                    'blonc.jpg',
+                    'france.jpg',
+                    'france_2.jpg',
+                    'ilse.jpg'
+                );
+                $rand_keys = array_rand($images, 1);
+                $header_image = get_bloginfo("template_url") . '/images/headers/' . $images[$rand_keys];
+            endif;
+
         ?>
 
-	   <div class="instagram_mosaic" style="background-image: url(<?php echo get_bloginfo("template_url") . '/images/headers/' . $images[$rand_keys]; ?>);"></div>
+	   <div class="instagram_mosaic" style="background-image: url(<?php echo $header_image; ?>);"></div>
 
 	    <a id="logo" href="<?php bloginfo('url'); ?>"><?php bloginfo('name'); ?></a>
 	    <small>Designer – developer – music lover – speaker – freelancer</small>
