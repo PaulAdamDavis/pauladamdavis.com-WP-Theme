@@ -2,6 +2,11 @@
 
     // TODO: Clean up and reorganise files
 
+    // Show errors, without needing to change wp-config.php
+    // error_reporting(E_ALL);
+    // ini_set('display_errors', '1');
+
+
     // Dirty pre function
     function pre($var) {
         echo '<pre style="background: #fcffb1; text-align: left; outline: 4px solid rgb('. rand(0, 250) .','. rand(0, 250) .','. rand(0, 250) .'); width: 100%; overflow: auto; max-height: 300px;">';
@@ -9,10 +14,8 @@
         echo '</pre>';
     }
 
-	// error_reporting(E_ALL);
-	// ini_set('display_errors', '1');
 
-    // Add post formats
+    // Add post formats & meta boxes
     add_action('after_setup_theme', 'childtheme_formats', 11);
     function childtheme_formats(){
          add_theme_support('post-formats', array(
@@ -20,12 +23,23 @@
             'link'
         ));
     }
-
-    // Post format meta boxes
     require_once "admin/formats-meta.php";
 
-    // Remove generator meta tag from head
+
+    // Remove generator meta tag from head & admin bar
     remove_action('wp_head', 'wp_generator');
+    add_filter('show_admin_bar', '__return_false');
+
+
+    // Support featured image & menues
+    add_theme_support('post-thumbnails');
+    add_theme_support('menus');
+
+
+    // Disable default theme updates from V3.0
+    remove_action( 'load-update-core.php', 'wp_update_themes' );
+    add_filter( 'pre_site_transient_update_themes', create_function( '$a', "return null;" ) );
+
 
     // If page needs pagination nav, return true
     function show_posts_nav() {
@@ -40,29 +54,10 @@
     }
     add_filter('excerpt_more', 'new_excerpt_more');
 
-    // Hide Admin Bar in WP 3.1
-    add_filter('show_admin_bar', '__return_false');
-
-
-    // If page is publiched
-    // http://app.kodery.com/s/35
-    function is_published($id) {
-        $page_data = get_page($id);
-        if($page_data->post_status == 'publish') :
-            return true;
-        else :
-            return false;
-        endif;
-    }
 
     // Alter time between RSS refreshes
     add_filter('wp_feed_cache_transient_lifetime', create_function('$a', 'return 1800;'));
 
-    // Support featured image
-    add_theme_support('post-thumbnails');
-
-    // Support menus
-    add_theme_support('menus');
 
 	// Get the contet by ID
 	function get_the_content_by_id($gcbid) {
@@ -91,28 +86,12 @@
 
 	// Linky tweet sting - http://davidwalsh.name/linkify-twitter-feed
 	function linkify_twitter_status($status_text) {  // linkify URLs
-	  $status_text = preg_replace(
-	    '/(https?:\/\/\S+)/',
-	    '<a href="\1">\1</a>',
-	    $status_text
-	  );
-
-	  // linkify twitter users
-	  $status_text = preg_replace(
-	    '/(^|\s)@(\w+)/',
-	    '\1@<a href="http://twitter.com/\2">\2</a>',
-	    $status_text
-	  );
-
-	  // linkify tags
-	  $status_text = preg_replace(
-	    '/(^|\s)#(\w+)/',
-	    '\1#<a href="http://search.twitter.com/search?q=%23\2">\2</a>',
-	    $status_text
-	  );
-
+	  $status_text = preg_replace('/(https?:\/\/\S+)/', '<a href="\1">\1</a>', $status_text);  // linkify twitter users
+	  $status_text = preg_replace('/(^|\s)@(\w+)/', '\1@<a href="http://twitter.com/\2">\2</a>', $status_text);
+	  $status_text = preg_replace('/(^|\s)#(\w+)/', '\1#<a href="http://search.twitter.com/search?q=%23\2">\2</a>', $status_text);
 	  return $status_text;
 	}
+
 
 	// Time ago
 	function _ago($tm,$rcs = 0) {
@@ -120,22 +99,18 @@
 		$pds = array('second','minute','hour','day','week','month','year','decade');
 		$lngh = array(1,60,3600,86400,604800,2630880,31570560,315705600);
 		for($v = sizeof($lngh)-1; ($v >= 0)&&(($no = $dif/$lngh[$v])<=1); $v--); if($v < 0) $v = 0; $_tm = $cur_tm-($dif%$lngh[$v]);
-
 		$no = floor($no); if($no <> 1) $pds[$v] .='s'; $x=sprintf("%d %s ",$no,$pds[$v]);
 		if(($rcs == 1)&&($v >= 1)&&(($cur_tm-$_tm) > 0)) $x .= time_ago($_tm);
 		return $x;
 	}
 
-	// Disable default theme updates from V3.0
-    remove_action( 'load-update-core.php', 'wp_update_themes' );
-    add_filter( 'pre_site_transient_update_themes', create_function( '$a', "return null;" ) );
 
 
 
 
-    // Change number of posts in search results
+    // Change number of posts in archive & search results
     function change_wp_archive_size($query) {
-        if ($query->is_archive) : // Make sure it is a search page
+        if ($query->is_archive || $query->is_search) : // Make sure it is a search page
             $query->query_vars['posts_per_page'] = 1000; // Change 10 to the number of posts you would like to show
         endif;
         return $query; // Return our modified query variables
@@ -143,11 +118,18 @@
     add_filter('pre_get_posts', 'change_wp_archive_size'); // Hook our custom function onto the request filter
 
 
+    // Make search use /search/whatever instead of ?s=whatever
+    function search_url_rewrite(){
+        if(is_search() && !empty($_GET['s'])){
+                wp_redirect(home_url("/search/"). urlencode(get_query_var('s')));
+                exit();
+        }
+    }
+    add_action('template_redirect', 'search_url_rewrite');
 
 
-
-	if (!function_exists('twentyeleven_comment')) :
-    function twentyeleven_comment($comment, $args, $depth) {
+    // Comment template
+    function pad_2013_comment($comment, $args, $depth) {
         $GLOBALS['comment'] = $comment;
         switch ($comment->comment_type) :
             case 'pingback' :
@@ -167,7 +149,6 @@
     				<?php comment_author_link() ?> <a href="#comment-<?php comment_id(); ?>" class="comment_hash">#</a>
     				<span><?php comment_date('F jS, Y') ?> at <?php comment_time() ?></span>
     				<?php echo get_avatar($comment, 30); ?>
-                    <!-- img alt="" src="<?php bloginfo("template_url"); ?>/images/gravatar.jpg" class="avatar avatar-30 photo" height="30" width="30" -->
     			</div>
     			<div class="right">
     				<?php if ($comment->comment_approved == '0') : ?>
@@ -195,8 +176,7 @@
         <?php
                 break;
         endswitch;
-    }
-    endif; // ends check for twentyeleven_comment()
+    } // end pad_2013_comment()
 
 
     function convert_number_to_words($number, $alt) {
@@ -315,48 +295,4 @@
         }
 
         return $string;
-    }
-
-
-
-    function change_wp_search_size($query) {
-        if ($query->is_search) :
-            $query->query_vars['posts_per_page'] = 1000;
-        endif;
-        return $query;
-    }
-    add_filter('pre_get_posts', 'change_wp_search_size');
-
-    function search_url_rewrite(){
-        if(is_search() && !empty($_GET['s'])){
-                wp_redirect(home_url("/search/"). urlencode(get_query_var('s')));
-                exit();
-        }
-    }
-    add_action('template_redirect', 'search_url_rewrite');
-
-
-
-
-
-
-    add_action('comment_post', 'ajaxify_comments',20, 2);
-    function ajaxify_comments($comment_ID, $comment_status){
-        if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
-        //If AJAX Request Then
-            switch($comment_status){
-                case '0':
-                    //notify moderator of unapproved comment
-                    wp_notify_moderator($comment_ID);
-                case '1': //Approved comment
-                    echo "success";
-                    $commentdata=&get_comment($comment_ID, ARRAY_A);
-                    $post=&get_post($commentdata['comment_post_ID']);
-                    wp_notify_postauthor($comment_ID, $commentdata['comment_type']);
-                break;
-                default:
-                    echo "error";
-            }
-            exit;
-        }
-    }
+    } // end convert_number_to_words()

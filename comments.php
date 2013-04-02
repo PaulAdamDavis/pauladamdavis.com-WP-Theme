@@ -12,7 +12,7 @@
 		</h2>
 
 		<ol class="commentlist" id="commentList">
-			<?php wp_list_comments(array('callback' => 'twentyeleven_comment')); ?>
+			<?php wp_list_comments(array('callback' => 'pad_2013_comment')); ?>
 		</ol>
 
 	<?php
@@ -39,7 +39,6 @@
             'label_submit' => __('Post Comment'),
         );
     ?>
-
 
 	<?php comment_form($defaults); ?>
 

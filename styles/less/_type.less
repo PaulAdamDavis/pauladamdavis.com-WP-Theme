@@ -26,12 +26,14 @@ h6, .h6 {
     font-size: 18px;
     line-height: 26px;
 }
-a:link, a:visited {
-    color: @brand;
-    text-decoration: none;
-}
-a:active, a:hover, a:focus {
-    color: darken(@brand, 10);
+a {
+    &:link, &:visited {
+        color: @brand;
+        text-decoration: none;
+    }
+    &:active, &:hover, &:focus {
+        color: darken(@brand, 10);
+    }
 }
 em, i {
     font-style: italic;
@@ -43,9 +45,12 @@ p {
     margin-bottom: 1em;
 }
 .red {
-    color: #cc0033;
+    color: @red;
     &:link, &:visited {
-        color: #cc0033;
+        color: @red;
+    }
+    &:active, &:focus, &:hover {
+        color: darken(@red, 10);
     }
 }
 .grey {
@@ -54,6 +59,15 @@ p {
         color: #999;
     }
     &:active, &:focus, &:hover {
-        color: #ccc;
+        color: darken(#999, 10);
+    }
+}
+.ltb {
+    color: @ltb;
+    &:link, &:visited {
+        color: @ltb;
+    }
+    &:active, &:focus, &:hover {
+        color: darken(@ltb, 10);
     }
 }

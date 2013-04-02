@@ -4,7 +4,7 @@
 
 	<h1>Paul is a freelance designer, award-winning developer, podcaster, speaker, music lover, drummer and general nerd.</h1>
 
-	<p>He periodically speaks about code &amp; stuff with Tom Ashworth and guests on <a href="http://lessthanbang.com" style="color: #52a0c8;">Less&nbsp;Than&nbsp;Bang</a></p>
+	<p>He periodically speaks about code &amp; stuff with Tom Ashworth and guests on <a href="http://lessthanbang.com" class="ltb">Less&nbsp;Than&nbsp;Bang</a></p>
 
 	<p>Paul works under the pseudonym <a href="http://codebymonkey.com" class="red">Code&nbsp;By&nbsp;Monkey</a>. Get in touch.</p>
 	<p>He is the creator of <a href="http://kodery.com" alt="Kodery">Kodery</a>, an online snippet storage tool for teams. It is used by everyone from lone developers to agency teams.</p>
@@ -12,10 +12,10 @@
 
 	<form method="get" action="/" class="search_box">
 		<input type="search" name="s" placeholder="Search&hellip;" />
-		<button type="submit" style="line-height: 28px;">Go</button>
+		<button type="submit">Go</button>
 	</form>
 
-	<h3 style="margin-top: 30px;">Instagram</h3>
+	<h3 class="gap_top">Instagram</h3>
 	<?php
         /*****
             GET INSTAGRAM DATA
@@ -38,18 +38,20 @@
         $instagram = json_decode($instagram);
         $i = 0;
         while($i <= ($count-1)) {
-            $data = $instagram->data[$i];
-            $thumb = $data->images->thumbnail->url;
-            $full = $data->images->standard_resolution->url;
-            $caption = (!empty($data->caption)) ? $data->caption->text : '';
-            echo '<a rel="instagram" href="'. $full .'"><img class="instagram_thumb" src="'. $thumb .'" /></a>';
+            $data = ($instagram) ? $instagram->data[$i] : false;
+            if ($data) :
+                $thumb = $data->images->thumbnail->url;
+                $full = $data->images->standard_resolution->url;
+                $caption = (!empty($data->caption)) ? $data->caption->text : '';
+                echo '<a rel="instagram" href="'. $full .'"><img class="instagram_thumb" src="'. $thumb .'" /></a>';
+            endif;
             $i++;
         }
 
 	?>
 	<div class="clear"></div>
 
-	<h3 style="margin-top: 50px;">Tweets <a href="http://twitter.com/pauladamdavis">#</a></h3>
+	<h3 class="gap_top_bigger">Tweets <a href="http://twitter.com/pauladamdavis">#</a></h3>
 	<?php
         /*****
             GET TWEETS

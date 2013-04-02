@@ -20,10 +20,6 @@
     	<?php } ?>
 
 		<?php
-
-			$year = $wp_query->query_vars['year'];
-			$month = $wp_query->query_vars['monthnum'];
-
 			while (have_posts()) : the_post();
                 get_template_part("_post_list_item");
             endwhile;
