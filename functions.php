@@ -1,7 +1,28 @@
 <?php
 
+    // TODO: Clean up and reorganise files
+
+    // Dirty pre function
+    function pre($var) {
+        echo '<pre style="background: #fcffb1; text-align: left; outline: 4px solid rgb('. rand(0, 250) .','. rand(0, 250) .','. rand(0, 250) .'); width: 100%; overflow: auto; max-height: 300px;">';
+            print_r($var);
+        echo '</pre>';
+    }
+
 	// error_reporting(E_ALL);
 	// ini_set('display_errors', '1');
+
+    // Add post formats
+    add_action('after_setup_theme', 'childtheme_formats', 11);
+    function childtheme_formats(){
+         add_theme_support('post-formats', array(
+            'aside',
+            'link'
+        ));
+    }
+
+    // Post format meta boxes
+    require_once "admin/formats-meta.php";
 
     // Remove generator meta tag from head
     remove_action('wp_head', 'wp_generator');

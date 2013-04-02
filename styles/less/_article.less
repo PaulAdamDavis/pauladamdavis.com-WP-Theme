@@ -1,5 +1,10 @@
 /* ARTICLE */
 article {
+    &.format-aside {
+        header {
+            margin-bottom: 10px;
+        }
+    }
 	header {
 		.clearfix;
 		margin-bottom: 50px;
@@ -9,14 +14,6 @@ article {
 			line-height: 38px;
 			margin-top: 6px;
 			margin-bottom: 6px;
-			a {
-				&:link, &:visited {
-					color: #000;
-				}
-				&:hover, &:active, &:focus {
-					color: @brand;
-				}
-			}
 		}
 		time {
 			font-family: Arial, sans-serif;
@@ -46,7 +43,7 @@ article {
 				font-size: 14px;
 			}
 		}
-		.category {
+		.category_link {
     		font-size: 10px;
     		color: #ccc;
     		font-family: Arial, sans-serif;
