@@ -9,7 +9,9 @@
         <?php
             if ($format === 'link' && $link_url) :
                 echo '<h1><a class="grey" href="'. $link_url .'">'. get_the_title() .' &#10142;</a></h1>';
-            elseif (!$format) :
+            elseif ($format === 'aside') :
+                    echo '<h1>'. get_the_title() .'</h1>';
+            else :
                 echo '<h1><a href="'. get_permalink() .'">'. get_the_title() .'</a></h1>';
             endif;
         ?>
@@ -31,7 +33,7 @@
             </span>
         <?php else : ?>
         <span class="category_link">
-            <a href="'. get_permalink() .'">#</a>
+            <a href="<?php the_permalink(); ?>">#</a>
         </a>
         <?php endif; ?>
     </header>
