@@ -7,6 +7,8 @@ Note: This is generally hacked together over a long time with no specific goals.
 * Implament category & date archives and search results the same way the main blog listing/archive is done
 * Change text from `px` to `rem` and `px` fallback
 * Kill any errors that PHP throws up
+* Add RSS feed widget for public GitHub commits with links
+* Maybe add counter showing total number Git commits i've made, public & private?
 
 # Changelog
 
