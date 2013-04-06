@@ -2,6 +2,20 @@
 
 <aside id="sidebar">
 
+    <div id="carbonads-container">
+        <div class="carbonad">
+            <div id="azcarbon"></div>
+            <script type="text/javascript">
+                var z = document.createElement("script");
+                z.type = "text/javascript";
+                z.async = true;
+                z.src = "http://engine.carbonads.com/z/12728/azcarbon_2_1_0_HORIZ";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(z, s);
+            </script>
+        </div>
+    </div>
+
 	<h1>Paul is a freelance designer, award-winning developer, podcaster, speaker, music lover, drummer and general nerd.</h1>
 
 	<p>He periodically speaks about code &amp; stuff with Tom Ashworth and guests on <a href="http://lessthanbang.com" class="ltb">Less&nbsp;Than&nbsp;Bang</a></p>

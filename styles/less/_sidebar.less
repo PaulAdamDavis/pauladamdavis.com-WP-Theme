@@ -70,5 +70,57 @@
 			margin: 0;
 		}
 	}
-
+}
+#carbonads-container {
+	margin-bottom: 20px;
+	.carbonad {
+		.clearfix;
+		position: relative;
+		background: none !important;
+		background-color: #fff !important;
+		border: none !important;
+		width: 100% !important;
+		height: auto !important;
+		overflow: visible !important;
+		.carbonad-image {
+			margin: 0 !important;
+		}
+		.carbonad-text {
+			position: absolute;
+			top: 0;
+			left: 150px;
+			right: 0;
+			bottom: 0;
+			padding-top: 0 !important;
+			width: auto !important;
+			padding-bottom: 5px !important;
+		}
+		.carbonad-tag {
+			position: absolute;
+			bottom: 0;
+			left: 150px;
+			right: 0;
+			text-align: left !important;
+			margin-top: 0 !important;
+		}
+	}
+}
+@media (max-width: 980px) {
+	#carbonads-container {
+		padding-bottom: 20px;
+		border-bottom: 1px solid #eee;
+		.carbonad {
+			.carbonad-image {
+				margin-bottom: 10px !important;
+				width: 100% !important;
+				height: auto !important;
+			}
+			.carbonad-text {
+				position: static;
+			}
+			.carbonad-tag {
+				position: static;
+			}
+		}
+	}
 }

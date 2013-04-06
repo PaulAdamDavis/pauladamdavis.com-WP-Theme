@@ -19,8 +19,10 @@
     <![endif]-->
 
     <!-- Typekit // Only works on pauladamdavis.com -->
+    <?php if ($_SERVER['HTTP_HOST'] == 'pauladamdavis.com') : ?>
     <script type="text/javascript" src="http://use.typekit.com/pxo6zke.js"></script>
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <?php endif; ?>
 
     <!-- CSS -->
 	<link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/styles/css/less.css?1234567" type="text/css" />

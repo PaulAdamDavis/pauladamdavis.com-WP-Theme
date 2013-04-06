@@ -20,7 +20,7 @@
 				<time datetime="<?php the_time(DATE_W3C) ?>" pubdate>Posted on <span><a href="/blog/<?php the_time('Y/n') ?>/"><?php the_time('F') ?></a> <?php the_time('jS') ?>, <a href="/blog/<?php the_time('Y') ?>/"><?php the_time('Y') ?></a></a></span></time>
 				<span class="comments"><?php comments_popup_link( 'No comments yet', 'Just one comment', '% comments', '', 'Comments are off for this post'); ?></span>
 				<?php if (!$format) : ?>
-                    <span class="category">
+                    <span class="category_link">
     				    Posted in <?php
                             $igc = 0;
                             foreach((get_the_category()) as $category) :
