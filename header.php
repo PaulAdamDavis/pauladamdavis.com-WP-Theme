@@ -25,7 +25,7 @@
     <?php endif; ?>
 
     <!-- CSS -->
-	<link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/styles/css/less.css?1234567" type="text/css" />
+	<link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/styles/css/less.css?123456789" type="text/css" />
 
 	<!-- The small mountain of stuff WP puts in -->
     <?php wp_head(); ?>
