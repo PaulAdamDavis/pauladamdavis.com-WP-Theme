@@ -38,7 +38,7 @@
         *****/
         $token = '213.f59def8.5df6aa3e1f01400796abe633d3c38db6';
         $userID = 213; // Yep, I was the two hundred and thirteenth user
-        $count = 30;
+        $count = 15;
         $url = "https://api.instagram.com/v1/users/self/media/recent?access_token=". $token ."&count=". $count;
         $instagram = get_transient("instagram");
         if (!$instagram) :
@@ -57,7 +57,7 @@
                 $thumb = $data->images->thumbnail->url;
                 $full = $data->images->standard_resolution->url;
                 $caption = (!empty($data->caption)) ? $data->caption->text : '';
-                echo '<a rel="instagram" href="'. $full .'"><img class="instagram_thumb" src="'. $thumb .'" /></a>';
+                echo '<a class="fancybox" rel="group-instagram" href="'. $full .'"><img class="instagram_thumb" src="'. $thumb .'" /></a>';
             endif;
             $i++;
         }

@@ -163,9 +163,10 @@ $(function(){
 
     // Fancybox
     // http://fancyapps.com/fancybox/
-    $("a[rel='instagram']").fancybox({
+    $("a.fancybox").fancybox({
         'overlayOpacity' : 0.8,
-        'overlayColor' : '#000'
+        'overlayColor' : '#000',
+        'padding' : 0
     });
 
     // Re-pain header, fix for resizing viewport uints

@@ -26,6 +26,36 @@
     require_once "admin/formats-meta.php";
 
 
+    // Make [gallery] shortcode use large images
+    function pad2013_gallery_atts( $atts ) {
+        if (has_post_format( 'gallery')) :
+            $atts['size'] = 'large';
+        endif;
+        return $atts;
+    }
+    add_filter('shortcode_atts_gallery', 'pad2013_gallery_atts' );
+
+
+    // Remove width & height from [gallery] images
+    add_filter('wp_get_attachment_link', 'remove_img_width_height', 10, 1);
+    function remove_img_width_height($html) {
+        $html = preg_replace( '/(width|height)=\"\d*\"\s/', "", $html );
+        return $html;
+    }
+
+
+    // Remove default styling from [gallery]
+    add_filter('use_default_gallery_style', '__return_false');
+
+
+    // Add fancybox class to [gallery] images
+    add_filter('wp_get_attachment_link', 'add_gallery_id_rel');
+    function add_gallery_id_rel($link) {
+        global $post;
+        return str_replace('<a href', '<a class="fancybox" rel="group-'. $post->ID .'" href', $link);
+    }
+
+
     // Remove generator meta tag from head & admin bar
     remove_action('wp_head', 'wp_generator');
     add_filter('show_admin_bar', '__return_false');
@@ -39,6 +69,18 @@
     // Disable default theme updates from V3.0
     remove_action( 'load-update-core.php', 'wp_update_themes' );
     add_filter( 'pre_site_transient_update_themes', create_function( '$a', "return null;" ) );
+
+
+    // Remove default CSS block from [gallery]
+    // add_filter( 'use_default_gallery_style', '__return_false' );
+
+
+    // Remove width & height from gallery shortcode
+    // add_filter('wp_get_attachment_link', 'remove_img_width_height', 10, 1);
+    // function remove_img_width_height($html) {
+    //     $html = preg_replace( '/(width|height)=\"\d*\"\s/', "", $html );
+    //     return $html;
+    // }
 
 
     // If page needs pagination nav, return true

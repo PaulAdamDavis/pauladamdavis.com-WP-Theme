@@ -16,22 +16,30 @@
 	}
 	input, textarea {
 		padding: 5px 10px;
-		/*border: 1px solid darken(@borderColor, 20);*/
+		border: 1px solid darken(@borderColor, 20);
 		border-radius: 0;
-		/*.box-shadow(inset 1px 1px 2px @borderColor);*/
-		/*.font;*/
+		.box-shadow(inset 1px 1px 2px @borderColor);
+		.font;
 		font-size: 13px;
 		line-height: 18px;
 		-webkit-appearance: none;
 	}
 	#submit	{
-		/*.font;*/
+		.font;
 		font-size: 13px;
 		border: 1px solid #999;
 		padding: 4px 10px;
 		margin: 10px 0 0 0;
 		/*#gradient > .vertical(#eee, #ccc);*/
 	}
+}
+@media (max-width: 800px) {
+    #commentform {
+        input {
+            width: 100%;
+            max-width: 100%;
+        }
+    }
 }
 #commentList {
     li {
