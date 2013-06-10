@@ -26,18 +26,50 @@ html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address
             box-sizing: border-box;
 }
 body {
-    background: #fff;
+    background-color: #fff;
+    background-attachment: fixed;
+    background-size: cover;
     color: #000;
     .font;
     font-size: 15px;
     line-height: 1.6;
-    box-shadow: 0px 0px 30px #555;
+}
+
+
+.outer_wrapper {
+    background: #fff;
+    .clearfix;
 }
 .wrapper {
     max-width: 1150px;
     margin: 0 auto;
     padding: 5%;
 }
+/*@media (min-width: 1600px) {
+    .wrapper {
+        max-width: 1500px;
+        #main {
+            width: 50%;
+        }
+        #sidebar {
+            width: 45%;
+            max-width: 100%;
+            .clearfix;
+            .half {
+                width: 45%;
+                float: left;
+                h3 {
+                    &:first-child {
+                        margin-top: 0;
+                    }
+                }
+                &:first-child {
+                    margin-right: 10%;
+                }
+            }
+        }
+    }
+}*/
 #main {
     margin: 0 0 50px;
 }

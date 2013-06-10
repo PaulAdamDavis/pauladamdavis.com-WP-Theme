@@ -1,6 +1,8 @@
 
 	</div><!-- end .wrapper -->
 
+    </div><!-- end .outer_wrapper -->
+
     <footer id="footer">
         <div class="wrapper">
             <small>&copy; 2010-<?php echo date('y'); ?> <?php bloginfo('name'); ?> – Connect on Twitter, predictably as <a href="http://twitter.com/pauladamdavis">@PaulAdamDavis</a></small>
@@ -16,7 +18,7 @@
         <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="//code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
         <script>window.jQuery || document.write('<script src="<?php bloginfo('template_url'); ?>/js/jquery-1.9.1.min.js"><\/script>')</script>
-        <script src="<?php bloginfo('template_url'); ?>/js/scripts.min.js?123456"></script>
+        <script src="<?php bloginfo('template_url'); ?>/js/scripts.min.js?1234567"></script>
     <?php endif; ?>
     <?php wp_footer(); ?>
 

@@ -50,28 +50,28 @@
         endif;
     ?>
 
+     <?php
+
+        if (has_post_thumbnail($post->ID)) :
+            $src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), array(1200, 600), false, '' );
+            $header_image = $src[0];
+        else :
+            $images = array(
+                'blonc.jpg',
+                'france.jpg',
+                'france_2.jpg',
+                'ilse.jpg'
+            );
+            $rand_keys = array_rand($images, 1);
+            $header_image = get_bloginfo("template_url") . '/images/headers/' . $images[$rand_keys];
+        endif;
+
+    ?>
+
 </head>
 <body <?php body_class(); ?>>
 
 	<header id="header">
-
-         <?php
-
-            if (has_post_thumbnail($post->ID)) :
-                $src = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), array(1200, 600), false, '' );
-                $header_image = $src[0];
-            else :
-                $images = array(
-                    'blonc.jpg',
-                    'france.jpg',
-                    'france_2.jpg',
-                    'ilse.jpg'
-                );
-                $rand_keys = array_rand($images, 1);
-                $header_image = get_bloginfo("template_url") . '/images/headers/' . $images[$rand_keys];
-            endif;
-
-        ?>
 
 	   <div class="instagram_mosaic" style="background-image: url(<?php echo $header_image; ?>);"></div>
 
@@ -89,6 +89,8 @@
 			</ul>
 		</nav>
 	</header>
+
+    <div class="outer_wrapper">
 
 	<div class="wrapper">
 

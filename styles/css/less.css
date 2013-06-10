@@ -214,18 +214,55 @@ select {
   box-sizing: border-box;
 }
 body {
-  background: #fff;
+  background-color: #fff;
+  background-attachment: fixed;
+  background-size: cover;
   color: #000;
   font-family: "ff-tisa-web-pro", "TisaPro", Times, serif;
   font-size: 15px;
   line-height: 1.6;
-  box-shadow: 0px 0px 30px #555;
+}
+.outer_wrapper {
+  background: #fff;
+  zoom: 1;
+}
+.outer_wrapper:after {
+  display: block;
+  visibility: hidden;
+  height: 0;
+  clear: both;
+  content: ".";
 }
 .wrapper {
   max-width: 1150px;
   margin: 0 auto;
   padding: 5%;
 }
+/*@media (min-width: 1600px) {
+    .wrapper {
+        max-width: 1500px;
+        #main {
+            width: 50%;
+        }
+        #sidebar {
+            width: 45%;
+            max-width: 100%;
+            .clearfix;
+            .half {
+                width: 45%;
+                float: left;
+                h3 {
+                    &:first-child {
+                        margin-top: 0;
+                    }
+                }
+                &:first-child {
+                    margin-right: 10%;
+                }
+            }
+        }
+    }
+}*/
 #main {
   margin: 0 0 50px;
 }
@@ -366,7 +403,7 @@ body {
   position: relative;
 }
 #footer .wrapper {
-  padding: 20px 0 0 0;
+  padding: 20px 20px 0 20px;
   margin-top: 50px;
   font-size: 14px;
   line-height: 21px;
@@ -688,12 +725,11 @@ article + article {
   z-index: 1000;
 }
 .gallery .gallery-item:hover img {
-  -webkit-transform: scale(1.15);
   -webkit-box-shadow: 0px 0px 3px #000000;
   -moz-box-shadow: 0px 0px 3px #000000;
   box-shadow: 0px 0px 3px #000000;
-  outline: 5px solid #fff;
-  box-shadow: 0px 0px 5px 5px #000;
+  outline: 10px solid #fff;
+  box-shadow: 0px 0px 5px 10px #000;
 }
 .gallery br {
   display: none;
@@ -722,14 +758,15 @@ article + article {
   -webkit-transition-duration: 0.2s;
   -webkit-transition-property: all;
   outline: 0px solid #fff;
+  position: relative;
 }
 #sidebar .instagram_thumb:hover {
-  -webkit-transform: scale(1.5);
   -webkit-box-shadow: 0px 0px 3px #000000;
   -moz-box-shadow: 0px 0px 3px #000000;
   box-shadow: 0px 0px 3px #000000;
   outline: 5px solid #fff;
   box-shadow: 0px 0px 5px 5px #000;
+  z-index: 100;
 }
 #sidebar .follow_me {
   font-size: 14px;

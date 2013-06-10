@@ -41,7 +41,6 @@
         if ($format === 'link' || $format === 'aside') :
             the_content();
         elseif ($format === 'gallery') :
-            // the_post_format_gallery();
             the_content();
         else :
             echo '<p>'.trimWords(strip_tags(get_the_content_by_id(get_the_id())), $content_length).'&hellip; <a href="'. get_permalink() .'">Continue reading</a></p>';
