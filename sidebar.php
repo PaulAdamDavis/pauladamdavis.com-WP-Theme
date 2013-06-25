@@ -50,14 +50,23 @@
             endif;
         endif;
         $instagram = json_decode($instagram);
+
         $i = 0;
         while($i <= ($count-1)) {
             $data = ($instagram) ? $instagram->data[$i] : false;
             if ($data) :
                 $thumb = $data->images->thumbnail->url;
-                $full = $data->images->standard_resolution->url;
+
+                if ($data->videos) :
+                    $media_class = 'video';
+                    $media_src = $data->videos->standard_resolution->url;
+                else :
+                    $media_class = 'image';
+                    $media_src = $data->images->standard_resolution->url;
+                endif;
+
                 $caption = (!empty($data->caption)) ? $data->caption->text : '';
-                echo '<a class="fancybox" rel="group-instagram" href="'. $full .'"><img class="instagram_thumb" src="'. $thumb .'" /></a>';
+                echo '<a class="fancybox insta_'. $media_class .'" rel="group-instagram" href="'. $media_src .'"><img class="instagram_thumb" src="'. $thumb .'" /></a>';
             endif;
             $i++;
         }
@@ -65,18 +74,31 @@
 	?>
 	<div class="clear"></div>
 
-	<?php /* <h3 class="gap_top_bigger">Tweets <a href="http://twitter.com/pauladamdavis">#</a></h3>
+	<h3 class="gap_top_bigger">Tweets <a href="http://twitter.com/pauladamdavis">#</a></h3>
 	<?php
-	    $twitterFeed = 'http://api.twitter.com/1/statuses/user_timeline.rss?screen_name=pauladamdavis';
-	    include_once(ABSPATH . WPINC . '/feed.php');
-	    $rss = fetch_feed(array(
-	        $twitterFeed
-	    ));
-	    foreach ($rss->get_items(0, 3) as $item):
-	        echo '<div class="tweet">';
-	            echo '<p>'. linkify_twitter_status(substr(strip_tags($item->get_title()), 15)) .' <span class="opacity">&mdash; <small><a href="'. $item->get_link() .'">'. _ago($item->get_date('U')) .' ago</a></small></span></p>';
-	        echo '</div>';
-	    endforeach;
-	?> */ ?>
+        $tweets = getTweets(4, 'pauladamdavis');
+        foreach($tweets as $tweet){
+            $tweet_text = $tweet['text'];
+
+            // Replace URLs from .tco to proper url
+            if (!empty($tweet['entities']['urls'])) :
+                foreach ($tweet['entities']['urls'] as $url) :
+                    $tweet_text = str_replace($url['url'], '<a href="'. $url['expanded_url'] .'">'. $url['display_url'] .'</a>', $tweet_text);
+                endforeach;
+            endif;
+
+            // Replace @mentions ith links
+            if (!empty($tweet['entities']['user_mentions'])) :
+                foreach ($tweet['entities']['user_mentions'] as $user) :
+                    $tweet_text = str_replace('@'.$user['screen_name'], '<a href="http://twitter.com/'. $user['name'] .'" title="'. $user['name'] .'">@'. $user['screen_name'] .'</a>', $tweet_text);
+                endforeach;
+            endif;
+
+            echo '<div class="tweet">';
+                echo '<p>'. $tweet_text .' <span class="opacity">&mdash; <small><a href="https://twitter.com/PaulAdamDavis/status/'. $tweet['id'] .'">'. _ago(strtotime($tweet['created_at'])) .' ago</a></small></span></p>';
+            echo '</div>';
+
+        }
+    ?>
 
 </aside>

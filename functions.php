@@ -7,10 +7,15 @@
     // ini_set('display_errors', '1');
 
 
-    // Dirty pre function
-    function pre($var) {
-        echo '<pre style="background: #fcffb1; text-align: left; outline: 4px solid rgb('. rand(0, 250) .','. rand(0, 250) .','. rand(0, 250) .'); width: 100%; overflow: auto; max-height: 300px;">';
-            print_r($var);
+    // Dirty pre function with limited height and randomnlt changing border colours
+    function pre($var, $fixed_height = true) {
+        $height = ($fixed_height) ? 'max-height: 300px;' : '';
+        echo '<pre style="background: #fcffb1; text-align: left; outline: 4px solid rgb('. rand(0, 250) .','. rand(0, 250) .','. rand(0, 250) .'); width: 100%; overflow: auto; '. $height .'">';
+            if ($var) :
+                print_r($var);
+            else :
+                echo "\n\n\t--- <b>No data recieved by pre() function</b> ---\n\n";
+            endif;
         echo '</pre>';
     }
 
@@ -126,14 +131,6 @@
 	    return $string;
 	}
 
-	// Linky tweet sting - http://davidwalsh.name/linkify-twitter-feed
-	function linkify_twitter_status($status_text) {  // linkify URLs
-	  $status_text = preg_replace('/(https?:\/\/\S+)/', '<a href="\1">\1</a>', $status_text);  // linkify twitter users
-	  $status_text = preg_replace('/(^|\s)@(\w+)/', '\1@<a href="http://twitter.com/\2">\2</a>', $status_text);
-	  $status_text = preg_replace('/(^|\s)#(\w+)/', '\1#<a href="http://search.twitter.com/search?q=%23\2">\2</a>', $status_text);
-	  return $status_text;
-	}
-
 
 	// Time ago
 	function _ago($tm,$rcs = 0) {
@@ -145,9 +142,6 @@
 		if(($rcs == 1)&&($v >= 1)&&(($cur_tm-$_tm) > 0)) $x .= time_ago($_tm);
 		return $x;
 	}
-
-
-
 
 
     // Change number of posts in archive & search results
