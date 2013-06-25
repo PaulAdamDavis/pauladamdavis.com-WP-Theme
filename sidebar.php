@@ -65,13 +65,8 @@
 	?>
 	<div class="clear"></div>
 
-	<h3 class="gap_top_bigger">Tweets <a href="http://twitter.com/pauladamdavis">#</a></h3>
+	<?php /* <h3 class="gap_top_bigger">Tweets <a href="http://twitter.com/pauladamdavis">#</a></h3>
 	<?php
-        /*****
-            GET TWEETS
-            ---
-            TODO: Convert to use API v1.1
-        *****/
 	    $twitterFeed = 'http://api.twitter.com/1/statuses/user_timeline.rss?screen_name=pauladamdavis';
 	    include_once(ABSPATH . WPINC . '/feed.php');
 	    $rss = fetch_feed(array(
@@ -82,6 +77,6 @@
 	            echo '<p>'. linkify_twitter_status(substr(strip_tags($item->get_title()), 15)) .' <span class="opacity">&mdash; <small><a href="'. $item->get_link() .'">'. _ago($item->get_date('U')) .' ago</a></small></span></p>';
 	        echo '</div>';
 	    endforeach;
-	?>
+	?> */ ?>
 
 </aside>
